@@ -4,6 +4,12 @@ variable "location" {
   default     = "westus"
 }
 
+variable "local_pdf_path" {
+  type        = string
+  description = "Path to local PDF folder"
+  default     = "./../pdfs"
+}
+
 variable "subscription_id" {
   type        = string
   description = "Subscription ID"

@@ -15,6 +15,7 @@ create-pdfs:
 	rm -rf ./pdfs
 	uv run ./create_pdfs.py
 
+# Get inventory listing for pdfs folder
 full-inventory:
 	cd pdfs && find . -name "*.pdf" -exec sh -c 'pdfinfo "$$1" | awk "/^Pages:/ {print \$$2, \"pages  -  \", \"$$1\"}"' _ {} \;
 
@@ -31,13 +32,12 @@ create-resources:
 	cd terraform && terraform plan -out main.tfplan
 	cd terraform && terraform apply main.tfplan
 
-
+# Incremental changes to Terraform config
 incremental-update:
 	$(call log_section, Incremental update with Terraform...)
 	# cd terraform && terraform init -upgrade
 	cd terraform && terraform plan -out main.tfplan
 	cd terraform && terraform apply main.tfplan
-
 
 # Get .env file
 write-outputs:
@@ -45,11 +45,10 @@ write-outputs:
 	rm -rf .env
 	./terraform/capture-outputs.sh
 
-
-
 # Generate random pdfs
 validate-search-index:
 	uv run ./page_distribution.py
+
 
 # COMMIT LOCAL BRANCH CHANGES
 branch=$(shell git symbolic-ref --short HEAD)

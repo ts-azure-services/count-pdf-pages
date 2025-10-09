@@ -188,26 +188,28 @@ resource "azurerm_role_assignment" "containerapp_to_storage" {
   principal_id         = azurerm_container_app.page_counter.identity[0].principal_id
 }
 
-# variable "local_pdf_path" {
-#   type        = string
-#   description = "Path to local PDF folder"
-#   default     = "./pdfs"
-# }
-#
-# resource "null_resource" "upload_pdfs" {
-#   provisioner "local-exec" {
-#     command = <<EOT
-#       az storage blob upload-batch \
-#         --account-name ${azurerm_storage_account.pdfstore.name} \
-#         --destination ${azurerm_storage_container.pdfs.name} \
-#         --source ${var.local_pdf_path}
-#     EOT
-#   }
-#
-#   depends_on = [
-#     azurerm_storage_container.pdfs
-#   ]
-# }
+resource "null_resource" "upload_pdfs" {
+  triggers = {
+    # Re-run if the PDF directory contents change
+    pdf_files = md5(join("", [for f in fileset(var.local_pdf_path, "**/*.pdf") : filemd5("${var.local_pdf_path}/${f}")]))
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+      az storage blob upload-batch \
+        --account-name ${azurerm_storage_account.pdfstore.name} \
+        --destination ${azurerm_storage_container.pdfs.name} \
+        --source ${var.local_pdf_path} \
+        --auth-mode login \
+        --overwrite
+    EOT
+  }
+
+  depends_on = [
+    azurerm_storage_container.pdfs,
+    azurerm_role_assignment.storage_blob_contributor
+  ]
+}
 
 # Create data source via REST API
 resource "null_resource" "search_datasource" {
