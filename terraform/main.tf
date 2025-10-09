@@ -188,11 +188,6 @@ resource "azurerm_role_assignment" "containerapp_to_storage" {
   principal_id         = azurerm_container_app.page_counter.identity[0].principal_id
 }
 
-# Output the container app URL
-output "container_app_url" {
-  value = "https://${azurerm_container_app.page_counter.ingress[0].fqdn}/api/PageCounter"
-}
-
 # variable "local_pdf_path" {
 #   type        = string
 #   description = "Path to local PDF folder"

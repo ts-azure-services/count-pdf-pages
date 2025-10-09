@@ -1,18 +1,17 @@
+import os
 from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
 from collections import defaultdict
-import json
+from dotenv import load_dotenv
 
 # Configuration
-SEARCH_ENDPOINT = "https://searchsvc-teachingdoe.search.windows.net"
-SEARCH_KEY = "K0D63DXXhA48wdrDCZZCSe31O5IQ3ziN68MGX1cbaDAzSeAK0QY8"
-INDEX_NAME = "pdf-pagecount-index"
+load_dotenv()
 
 # Initialize the search client
-credential = AzureKeyCredential(SEARCH_KEY)
+credential = AzureKeyCredential(os.getenv("SEARCH_KEY"))
 search_client = SearchClient(
-    endpoint=SEARCH_ENDPOINT,
-    index_name=INDEX_NAME,
+    endpoint=os.getenv("SEARCH_SERVICE"),
+    index_name=os.getenv("SEARCH_INDEX"),
     credential=credential
 )
 

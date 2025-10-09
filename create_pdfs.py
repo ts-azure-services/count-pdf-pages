@@ -75,7 +75,7 @@ if __name__ == "__main__":
     # ---- USER SETTINGS ----
     SOURCE_PDF = "sample.pdf"             # Your single-page PDF
     OUTPUT_FOLDER = "./pdfs"    # Folder for output
-    NUM_DOCS = 1000                        # Number of PDFs to generate
+    NUM_DOCS = 100                        # Number of PDFs to generate
     MIN_PAGES = 5                         # Minimum pages per PDF
     MAX_PAGES = 100                       # Maximum pages per PDF
     MAX_WORKERS = None                    # Defaults to CPU count (use 4, 8, etc. to cap)

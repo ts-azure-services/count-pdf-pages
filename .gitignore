@@ -9,6 +9,9 @@ wheels/
 # Virtual environments
 .venv
 
+# Other
+*.env
+
 # Random files
 pdfs/
 

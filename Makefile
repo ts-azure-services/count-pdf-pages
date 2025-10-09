@@ -38,6 +38,15 @@ incremental-update:
 	cd terraform && terraform plan -out main.tfplan
 	cd terraform && terraform apply main.tfplan
 
+
+# Get .env file
+write-outputs:
+	$(call log_section, Capture env variables...)
+	rm -rf .env
+	./terraform/capture-outputs.sh
+
+
+
 # Generate random pdfs
 validate-search-index:
 	uv run ./page_distribution.py
