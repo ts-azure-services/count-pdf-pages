@@ -1,0 +1,5 @@
+flask==3.0.0
+PyPDF2==3.0.1
+azure-storage-blob==12.19.0
+azure-identity==1.15.0
+gunicorn==21.2.0

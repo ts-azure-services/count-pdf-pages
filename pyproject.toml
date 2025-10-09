@@ -1,0 +1,11 @@
+[project]
+name = "count-pdf-pages"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "azure-search-documents>=11.5.3",
+    "pymupdf>=1.26.4",
+    "tqdm>=4.67.1",
+]
