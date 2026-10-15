@@ -1,0 +1,24 @@
+[project]
+name = "count-pdf-pages"
+version = "0.1.0"
+description = "Generate PDFs in Azure Blob Storage and report their page counts"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "azure-identity>=1.25,<2",
+    "azure-storage-blob>=12.26,<13",
+    "duckdb>=1.1",
+    "pyarrow>=18",
+    "pymupdf>=1.26.4",
+    "tqdm>=4.67.1",
+]
+
+[dependency-groups]
+# Runtime set for the Container Apps jobs image (no DuckDB; report runs locally).
+jobs = [
+    "azure-identity>=1.25,<2",
+    "azure-storage-blob>=12.26,<13",
+    "pyarrow>=18",
+    "pymupdf>=1.26.4",
+    "tqdm>=4.67.1",
+]

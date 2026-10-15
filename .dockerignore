@@ -1,0 +1,6 @@
+*
+!pyproject.toml
+!uv.lock
+!jobs/
+**/__pycache__
+**/.DS_Store
