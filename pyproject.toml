@@ -9,7 +9,7 @@ dependencies = [
     "azure-storage-blob>=12.26,<13",
     "duckdb>=1.1",
     "pyarrow>=18",
-    "pymupdf>=1.26.4",
+    "pymupdf>=1.26.4,<1.27",  # 1.27+ rejects select() past ~273 pages
     "tqdm>=4.67.1",
 ]
 
@@ -19,6 +19,6 @@ jobs = [
     "azure-identity>=1.25,<2",
     "azure-storage-blob>=12.26,<13",
     "pyarrow>=18",
-    "pymupdf>=1.26.4",
+    "pymupdf>=1.26.4,<1.27",  # 1.27+ rejects select() past ~273 pages
     "tqdm>=4.67.1",
 ]
